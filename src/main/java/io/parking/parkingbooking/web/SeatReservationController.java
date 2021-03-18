@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ import io.parking.parkingbooking.repositories.SeatReservationRepository;
 import io.parking.parkingbooking.services.MapValidationErrorService;
 import io.parking.parkingbooking.services.SeatReservationService;
 
-@Controller
+@CrossOrigin(origins = "https://reservation-pp.herokuapp.com")
 @RestController
 @RequestMapping(value="/api")
 public class SeatReservationController {
