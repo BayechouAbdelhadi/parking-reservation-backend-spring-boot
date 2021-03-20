@@ -57,6 +57,7 @@ public class SeatReservationController {
 
       return new ResponseEntity<Set<SeatReservation >>(partS, HttpStatus.CREATED);
 	}
+	
 	@GetMapping(value="/seats/{seat}")
 	  public ResponseEntity<?> findAllReservationsToday(@PathVariable int seat) throws ParseException{
 		SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");

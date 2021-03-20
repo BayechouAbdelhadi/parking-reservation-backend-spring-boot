@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.parking.parkingbooking.domain.ParkingReservation;
+import io.parking.parkingbooking.domain.SeatReservation;
 import io.parking.parkingbooking.dto.ParkingReservationDto;
 import io.parking.parkingbooking.repositories.ParkingReservationRepository;
 import io.parking.parkingbooking.security.Path;
@@ -49,6 +50,13 @@ public class ParkingReservationController {
         ParkingReservation parking1 =  parkingResrvationService.saveParkingReservation(parking, principal.getName());
         return new ResponseEntity<ParkingReservation>(parking1, HttpStatus.CREATED);
     }
+	@GetMapping(value="/parking")
+	  public ResponseEntity<?> findAllReservations(Principal principal){
+		 Set<ParkingReservation >partS =  parkingReservationRepository.findByUser_Username(principal.getName());
+	   //List<Part >partS = seatReservationRepository.findAll();
+
+    return new ResponseEntity<Set<ParkingReservation >>(partS, HttpStatus.CREATED);
+	}
 	
 	@GetMapping(value="/parking/{park}")
 	  public ResponseEntity<?> findParkingReservationsByParkId(@PathVariable int park){
