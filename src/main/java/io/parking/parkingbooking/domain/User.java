@@ -46,6 +46,9 @@ public class User implements UserDetails {
     
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     private Set<SeatReservation> parts ;
+   
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
+    private Set<ParkingReservation> parks ;
     
 	public User() {
     }

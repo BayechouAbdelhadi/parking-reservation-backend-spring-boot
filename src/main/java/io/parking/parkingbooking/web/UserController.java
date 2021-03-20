@@ -24,6 +24,7 @@ import io.parking.parkingbooking.dto.UserRegistrationDto;
 import io.parking.parkingbooking.payload.JWTLoginSucessReponse;
 import io.parking.parkingbooking.payload.LoginRequest;
 import io.parking.parkingbooking.security.JwtTokenProvider;
+import io.parking.parkingbooking.security.Path;
 import io.parking.parkingbooking.services.MapValidationErrorService;
 import io.parking.parkingbooking.services.UserService;
 import io.parking.parkingbooking.validator.UserValidator;
@@ -35,7 +36,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-@CrossOrigin(origins = "https://reservation-pp.herokuapp.com")
+@CrossOrigin(origins = Path.PATH)
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

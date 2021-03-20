@@ -1,16 +1,17 @@
 package io.parking.parkingbooking.web;
+
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
-import io.parking.parkingbooking.domain.SeatReservation ;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,43 +21,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.parking.parkingbooking.dto.AllReservationDto;
-import io.parking.parkingbooking.dto.SeatReservationDto;
-import io.parking.parkingbooking.repositories.SeatReservationRepository;
+import io.parking.parkingbooking.domain.ParkingReservation;
+import io.parking.parkingbooking.dto.ParkingReservationDto;
+import io.parking.parkingbooking.repositories.ParkingReservationRepository;
 import io.parking.parkingbooking.security.Path;
 import io.parking.parkingbooking.services.MapValidationErrorService;
-import io.parking.parkingbooking.services.SeatReservationService;
+import io.parking.parkingbooking.services.ParkingReservationService;
 
 @CrossOrigin(origins = Path.PATH)
 @RestController
 @RequestMapping(value="/api")
-public class SeatReservationController {
+public class ParkingReservationController {
 	
 	@Autowired
-	SeatReservationService seatReservationService;
+	ParkingReservationService parkingResrvationService;
 	
 	@Autowired
-	SeatReservationRepository seatReservationRepository;
+	ParkingReservationRepository parkingReservationRepository;
 	
 	@Autowired
     private MapValidationErrorService mapValidationErrorService;
 	
-	@PostMapping(value="/seats")
-	  public ResponseEntity<?> createNewSeat(@Valid @RequestBody SeatReservationDto part, BindingResult result, Principal principal){
-
+	@PostMapping(value="/parking")
+	  public ResponseEntity<?> createNewParking(@Valid @RequestBody ParkingReservationDto parking, BindingResult result, Principal principal){
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap!=null) return errorMap;
-        SeatReservation part1 =  seatReservationService.saveSeatReservation(part, principal.getName());
-        return new ResponseEntity<SeatReservation>(part1, HttpStatus.CREATED);
+        ParkingReservation parking1 =  parkingResrvationService.saveParkingReservation(parking, principal.getName());
+        return new ResponseEntity<ParkingReservation>(parking1, HttpStatus.CREATED);
     }
 	
-	@GetMapping(value="/seats")
-	  public ResponseEntity<?> findAllReservations(Principal principal){
-		 Set<SeatReservation >partS =  seatReservationRepository.findByUser_Username(principal.getName());
-	   //List<Part >partS = seatReservationRepository.findAll();
-
-      return new ResponseEntity<Set<SeatReservation >>(partS, HttpStatus.CREATED);
+	@GetMapping(value="/parking/{park}")
+	  public ResponseEntity<?> findParkingReservationsByParkId(@PathVariable int park){
+		 Set<ParkingReservation> parking=  parkingReservationRepository.findByPark(park);
+	   //List<parking >parkingS = seatReservationRepository.findAll();
+      return new ResponseEntity<Set<ParkingReservation >>(parking, HttpStatus.CREATED);
 	}
+	/*
 	@GetMapping(value="/seats/{seat}")
 	  public ResponseEntity<?> findAllReservationsToday(@PathVariable int seat) throws ParseException{
 		SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
@@ -71,8 +71,8 @@ public class SeatReservationController {
 		//String now=format.format((new Date()));
 		Date d =format.parse(allReservationDto.getDate());
 		Set<SeatReservation > todayReservation =  seatReservationRepository.findByReservationdateAndSeat( d,seat);
-  return new ResponseEntity<Set<SeatReservation >>(todayReservation, HttpStatus.CREATED);
+  		return new ResponseEntity<Set<SeatReservation >>(todayReservation, HttpStatus.CREATED);
 	}
-
+*/
 
 }
