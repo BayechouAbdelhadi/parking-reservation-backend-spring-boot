@@ -62,16 +62,17 @@ public class SeatReservationController {
 	  public ResponseEntity<?> findAllReservationsToday(@PathVariable int seat) throws ParseException{
 		SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
 		String now=format.format((new Date()));
-		Date d =format.parse(now);
-		Set<SeatReservation > todayReservation =  seatReservationRepository.findByReservationdateAndSeat( d,seat);
+		System.out.println(now);
+		//Date d =format.parse(now);
+		Set<SeatReservation > todayReservation =  seatReservationRepository.findByReservationdateAndSeat( now,seat);
     return new ResponseEntity<Set<SeatReservation >>(todayReservation, HttpStatus.CREATED);
 	}
 	@PostMapping(value="/seats/{seat}")
 	  public ResponseEntity<?> findAllReservations(@PathVariable int seat, @RequestBody AllReservationDto allReservationDto ) throws ParseException{
-		SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
+		//SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
 		//String now=format.format((new Date()));
-		Date d =format.parse(allReservationDto.getDate());
-		Set<SeatReservation > todayReservation =  seatReservationRepository.findByReservationdateAndSeat( d,seat);
+		//Date d =format.parse(allReservationDto.getDate());
+		Set<SeatReservation > todayReservation =  seatReservationRepository.findByReservationdateAndSeat( allReservationDto.getDate(),seat);
   return new ResponseEntity<Set<SeatReservation >>(todayReservation, HttpStatus.CREATED);
 	}
 

@@ -21,7 +21,7 @@ public class ParkingReservationService {
 	@Autowired
 	UserRepository userReposittory;
 	
-	public ParkingReservation saveParkingReservation(ParkingReservationDto parkingDto,String username) 
+	/*public ParkingReservation saveParkingReservation(ParkingReservationDto parkingDto,String username) 
 	{
 		User user = userReposittory.findByUsername(username);
 		ParkingReservation parking=new ParkingReservation();
@@ -38,5 +38,15 @@ public class ParkingReservationService {
 		ParkingReservation p= parkingRepository.save(parking);
 		return p;
 	}
-	
+	*/public ParkingReservation saveParkingReservation(ParkingReservationDto parkingDto,String username) 
+	{
+		User user = userReposittory.findByUsername(username);
+		ParkingReservation parking=new ParkingReservation();
+		parking.setUser(user);
+		parking.setPark(parkingDto.getPark());
+		parking.setStartDate(parkingDto.getStart_reservation());
+		parking.setEndDate(parkingDto.getEnd_reservation());
+		ParkingReservation p= parkingRepository.save(parking);
+		return p;
+	}
 }

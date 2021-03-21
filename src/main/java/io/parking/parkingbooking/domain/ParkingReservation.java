@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -28,9 +30,75 @@ public class ParkingReservation {
     @Column(updatable = false)
     private Date created_At;
     
+    private String startDate;
+    
+    private String endDate;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private User user;
+	
+	public ParkingReservation() {}
+    
+    @PrePersist
+    protected void onCreate(){
+        this.created_At = new Date();
+    }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getPark() {
+		return park;
+	}
+
+	public void setPark(int park) {
+		this.park = park;
+	}
+
+	public Date getCreated_At() {
+		return created_At;
+	}
+
+	public void setCreated_At(Date created_At) {
+		this.created_At = created_At;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+    
+    /*
+    @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date startDate;
     
+    @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date endDate;
 	
@@ -92,5 +160,5 @@ public class ParkingReservation {
     protected void onCreate(){
         this.created_At = new Date();
     }
-	
+	*/
 }

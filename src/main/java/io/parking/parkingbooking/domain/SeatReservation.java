@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -30,7 +32,67 @@ public class SeatReservation {
     @Column(updatable = false)
     private Date created_At;
     
-    @JsonFormat(pattern="yyyy-MM-dd")
+    private String reservationdate;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private User user;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
+
+	public int getSeat() {
+		return seat;
+	}
+
+	public void setSeat(int seat) {
+		this.seat = seat;
+	}
+
+	public Date getCreated_At() {
+		return created_At;
+	}
+
+	public void setCreated_At(Date created_At) {
+		this.created_At = created_At;
+	}
+
+	public String getReservationdate() {
+		return reservationdate;
+	}
+
+	public void setReservationdate(String reservationdate) {
+		this.reservationdate = reservationdate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	@PrePersist
+    protected void onCreate(){
+        this.created_At = new Date();
+    }
+    
+
+    /*@JsonFormat(pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date reservationdate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -91,5 +153,5 @@ public class SeatReservation {
 		this.user = user;
 	}
 	
-
+*/
 }	

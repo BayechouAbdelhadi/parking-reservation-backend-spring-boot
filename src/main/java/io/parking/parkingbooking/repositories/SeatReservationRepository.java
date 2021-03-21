@@ -11,6 +11,7 @@ import io.parking.parkingbooking.domain.SeatReservation;
 public interface  SeatReservationRepository extends JpaRepository<SeatReservation,Long> {
 SeatReservation save(SeatReservation part);
 Set<SeatReservation> findByUser_Username(String username);
-Set<SeatReservation> findByReservationdateAndSeat(Date reservationDtae,int seat);
+//Set<SeatReservation> findByReservationdateAndSeat(Date reservationDtae,int seat);
+Set<SeatReservation> findByReservationdateAndSeat(String reservationDtae,int seat);
 
 }

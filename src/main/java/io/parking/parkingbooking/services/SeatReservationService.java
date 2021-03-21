@@ -20,7 +20,18 @@ public class SeatReservationService {
 	
 	@Autowired
 	UserRepository userReposittory;
-	
+	public SeatReservation saveSeatReservation(SeatReservationDto seatDto,String username) 
+	{
+		User user = userReposittory.findByUsername(username);
+		SeatReservation seat=new SeatReservation();
+		seat.setUser(user);
+		seat.setTime(seatDto.getTime());
+		seat.setSeat(seatDto.getSeat());
+		seat.setReservationdate(seatDto.getReservation_date());
+		SeatReservation p= partReprsitory.save(seat);
+		return p;
+	}
+	/*
 	public SeatReservation saveSeatReservation(SeatReservationDto seatDto,String username) 
 	{
 		User user = userReposittory.findByUsername(username);
@@ -37,5 +48,5 @@ public class SeatReservationService {
 		SeatReservation p= partReprsitory.save(seat);
 		return p;
 	}
-	
+	*/
 }
