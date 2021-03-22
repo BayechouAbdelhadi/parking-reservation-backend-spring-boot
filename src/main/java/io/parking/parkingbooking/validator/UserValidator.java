@@ -22,11 +22,11 @@ public class UserValidator implements Validator {
     	UserRegistrationDto user = (UserRegistrationDto) object;
 
         if(user.getPassword().length() <6){
-            errors.rejectValue("password","Length", "Password must be at least 6 characters");
+            errors.rejectValue("password","Length", "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل");
         }
 
         if(!user.getPassword().equals(user.getConfirmPassword())){
-            errors.rejectValue("confirmPassword","Match", "Passwords must match");
+            errors.rejectValue("confirmPassword","Match", "يجب ان تتطابق كلمات المرور");
 
         }
 

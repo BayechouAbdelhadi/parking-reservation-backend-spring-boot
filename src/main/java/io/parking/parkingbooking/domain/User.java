@@ -21,13 +21,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Email(message = "Username needs to be an email")
-    @NotBlank(message = "username is required")
+    @Email(message = "أدخل عنوان بريد صحيح")
+    @NotBlank(message = "البريد الإلكتروني مطلوب")
     @Column(unique = true)
     private String username;
-	@NotBlank(message = "Please enter your full name")
+	@NotBlank(message = "من فضلك ادخل اسمك الكامل")
     private String fullName;
-    @NotBlank(message = "Password field is required")
+    @NotBlank(message = "حقل كلمة المرور مطلوب")
     private String password;
     @Transient
     private String confirmPassword;
