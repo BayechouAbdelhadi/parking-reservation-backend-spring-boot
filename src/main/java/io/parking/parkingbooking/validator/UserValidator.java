@@ -21,8 +21,8 @@ public class UserValidator implements Validator {
 
     	UserRegistrationDto user = (UserRegistrationDto) object;
 
-        if(user.getPassword().length() <6){
-            errors.rejectValue("password","Length", "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل");
+        if(user.getPassword().length() <4){
+            errors.rejectValue("password","Length", "يجب أن تتكون كلمة المرور من 4  أحرف على الأقل");
         }
 
         if(!user.getPassword().equals(user.getConfirmPassword())){
